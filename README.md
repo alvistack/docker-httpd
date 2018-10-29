@@ -46,7 +46,7 @@ Start Apache:
 
     # Pull latest image
     docker pull alvistack/httpd
-
+    
     # Run as detach
     docker run \
         -itd \
