@@ -2,7 +2,13 @@
 
 ## 2.4.x-0alvistack1 - TBC
 
+### Major Changes
+
+  - Ensure correct owner:group with docker-entrypoint.sh
+
 ## 2.4.37-0alvistack1 - 2018-10-29
+
+### Major Changes
 
   - Update dumb-init to v.1.2.2
   - Remove Debian style Apache configuration
