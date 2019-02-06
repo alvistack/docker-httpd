@@ -20,7 +20,7 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 ENTRYPOINT [ "dumb-init", "--" ]
-CMD        [ "docker-entrypoint.sh" ]
+CMD        [ "/usr/local/apache2/bin/httpd", "-DFOREGROUND" ]
 
 # Prepare APT depedencies
 RUN set -ex \
@@ -42,4 +42,7 @@ RUN set -ex \
 
 # Ensure required folders exist with correct owner:group
 RUN set -ex \
-    && rm -rf /usr/local/apache2/conf/extra/*.conf
+    && rm -rf /usr/local/apache2/conf/extra/*.conf \
+    && mkdir -p /var/www/html \
+    && chown -Rf www-data:www-data /var/www/html \
+    && chmod 0755 /var/www/html
