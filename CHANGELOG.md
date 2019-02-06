@@ -4,8 +4,6 @@
 
 ### Major Changes
 
-  - Ensure correct owner:group with docker-entrypoint.sh
-
 ## 2.4.37-0alvistack1 - 2018-10-29
 
 ### Major Changes
