@@ -22,7 +22,7 @@ EXPOSE 80
 ENTRYPOINT [ "dumb-init", "--" ]
 CMD        [ "/usr/local/apache2/bin/httpd", "-DFOREGROUND" ]
 
-# Prepare APT depedencies
+# Prepare APT dependencies
 RUN set -ex \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y curl patch \
