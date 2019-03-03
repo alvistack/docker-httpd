@@ -20,12 +20,12 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 ENTRYPOINT [ "dumb-init", "--" ]
-CMD        [ "/usr/local/apache2/bin/httpd", "-DFOREGROUND" ]
+CMD        [ "httpd-foreground" ]
 
-# Prepare APT depedencies
+# Prepare APT dependencies
 RUN set -ex \
     && apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y curl patch \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y curl htop less patch vim wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dumb-init

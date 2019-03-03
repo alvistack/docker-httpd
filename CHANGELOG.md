@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Revamp CMD as upstream image
+  - Add some debug utils
+
 ## 2.4.37-0alvistack1 - 2018-10-29
 
 ### Major Changes
