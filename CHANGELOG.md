@@ -1,8 +1,14 @@
 # Docker Image Packaging for Apache
 
-## 2.4.x-0alvistack1 - TBC
+## 2.4.39-0alvistackx - TBC
 
 ### Major Changes
+
+## 2.4.39-0alvistack2 - 2019-04-16
+
+### Major Changes
+
+  - Improve checksum handling
 
 ## 2.4.38-0alvistack5 - 2019-03-18
 
