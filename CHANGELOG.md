@@ -4,6 +4,12 @@
 
 ### Major Changes
 
+## 2.4.39-0alvistack4 - 2019-05-20
+
+### Major Changes
+
+  - Bugfix "Build times out because no output was received"
+
 ## 2.4.39-0alvistack2 - 2019-04-16
 
 ### Major Changes
