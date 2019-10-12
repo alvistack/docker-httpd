@@ -1,4 +1,4 @@
-# Docker Image Packaging for Apache
+# Docker Image Packaging for Apache HTTP Server
 
 [![Travis](https://img.shields.io/travis/alvistack/docker-httpd.svg)](https://travis-ci.org/alvistack/docker-httpd)
 [![GitHub release](https://img.shields.io/github/release/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/releases)
@@ -18,7 +18,7 @@ Learn more about Apache: <https://httpd.apache.org/>
 
 This Docker container makes it easy to get an instance of Apache up and running.
 
-Based on [Official Apache Docker Image](https://hub.docker.com/_/httpd/) with some minor hack:
+Based on [Official Ubuntu Docker Image](https://hub.docker.com/_/ubuntu/) with some minor hack:
 
   - Handle `ENTRYPOINT` with [dumb-init](https://github.com/Yelp/dumb-init)
   - Change `User` and `Group` to `www-data`

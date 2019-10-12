@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+<IfModule mod_remoteip.c>
+    RemoteIPHeader X-Forwarded-For
+    RemoteIPInternalProxy 224.0.0.0/4
+    RemoteIPInternalProxy 10.0.0.0/8
+    RemoteIPInternalProxy 172.16.0.0/12
+    RemoteIPInternalProxy 192.168.0.0/16
+    RemoteIPInternalProxy 127.0.0.1
+
+    RemoteIPProxyProtocol On
+    RemoteIPProxyProtocolExceptions 224.0.0.0/4
+    RemoteIPProxyProtocolExceptions 10.0.0.0/8
+    RemoteIPProxyProtocolExceptions 172.16.0.0/12
+    RemoteIPProxyProtocolExceptions 192.168.0.0/16
+    RemoteIPProxyProtocolExceptions 127.0.0.1
+</IfModule>
