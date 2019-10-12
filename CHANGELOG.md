@@ -1,8 +1,14 @@
 # Docker Image Packaging for Apache
 
-## 2.4.39-0alvistackx - TBC
+## 2.4.41-1alvistackx - TBC
 
 ### Major Changes
+
+## 2.4.41-1alvistack1 - 2019-10-12
+
+### Major Changes
+
+  - Revamp as Ansible based
 
 ## 2.4.39-0alvistack4 - 2019-05-20
 
