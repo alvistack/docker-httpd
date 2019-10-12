@@ -12,42 +12,51 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM httpd:2.4
+FROM ubuntu:18.04
 
-ENV DUMB_INIT_DOWNLOAD_URL      "https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64"
-ENV DUMB_INIT_DOWNLOAD_CHECKSUM "c16e45a301234c732af4c38be1e1000a2ce1cba8"
+ENV LANG   "en_US.utf8"
+ENV LC_ALL "en_US.utf8"
+ENV SHELL  "/bin/bash"
+ENV TZ     "UTC"
 
 VOLUME  /var/www/html
 WORKDIR /var/www/html
 
 EXPOSE 80
 
-ENTRYPOINT [ "dumb-init", "--" ]
-CMD        [ "httpd-foreground" ]
+ENTRYPOINT [ "dumb-init", "--", "docker-entrypoint.sh" ]
+CMD        [ "apachectl", "-DFOREGROUND" ]
+
+# Hotfix for en_US.utf8 locale
+RUN set -ex \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install locales \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Prepare APT dependencies
 RUN set -ex \
     && apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y curl htop less patch vim wget \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install ca-certificates curl gcc git libffi-dev libssl-dev lsb-release make python3 python3-dev sudo \
     && rm -rf /var/lib/apt/lists/*
 
-# Install dumb-init
+# Install PIP
 RUN set -ex \
-    && curl -skL $DUMB_INIT_DOWNLOAD_URL > /usr/local/bin/dumb-init \
-    && sha1sum /usr/local/bin/dumb-init \
-    && echo "$DUMB_INIT_DOWNLOAD_CHECKSUM /usr/local/bin/dumb-init" | sha1sum -c - \
-    && chmod 0755 /usr/local/bin/dumb-init
+    && curl -skL https://bootstrap.pypa.io/get-pip.py | python3
 
 # Copy files
 COPY files /
 
-# Apply patches
+# Bootstrap with Ansible
 RUN set -ex \
-    && patch -d / -p1 < /.patch
-
-# Ensure required folders exist with correct owner:group
-RUN set -ex \
-    && rm -rf /usr/local/apache2/conf/extra/*.conf \
-    && mkdir -p /var/www/html \
-    && chown -Rf www-data:www-data /var/www/html \
-    && chmod 0755 /var/www/html
+    && cd /etc/ansible/roles/localhost \
+    && pip3 install --upgrade --ignore-installed --requirement requirements.txt \
+    && molecule dependency \
+    && molecule lint \
+    && molecule syntax \
+    && molecule converge \
+    && molecule verify \
+    && rm -rf /var/cache/ansible/* \
+    && rm -rf /root/.cache/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/lib/apt/lists/*
