@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Upgrade minimal Ansible support to 2.9.0
 ## 2.4.41-1alvistack1 - 2019-10-12
 
 ### Major Changes
