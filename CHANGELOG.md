@@ -1,10 +1,18 @@
 # Docker Image Packaging for Apache
 
-## 2.4.41-1alvistackx - TBC
+## 2.4.41-XalvistackY - TBC
+
+### Major Changes
+
+## 2.4.41-2alvistack3 - 2019-11-05
 
 ### Major Changes
 
   - Upgrade minimal Ansible support to 2.9.0
+  - Upgrade Travis CI test as Ubuntu Bionic based
+  - Default with Python 3
+  - Hotfix for en\_US.utf8 locale
+
 ## 2.4.41-1alvistack1 - 2019-10-12
 
 ### Major Changes
