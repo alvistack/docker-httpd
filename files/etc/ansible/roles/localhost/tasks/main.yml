@@ -38,7 +38,9 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/apache2/apache2.conf" }
+    - { dest: "/etc/apache2/conf-available/apache2-doc.conf" }
     - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+    - { dest: "/etc/apache2/conf-available/serve-cgi-bin.conf" }
     - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
     - { dest: "/etc/apache2/mods-available/remoteip.conf" }
     - { dest: "/etc/apache2/sites-available/000-default.conf" }
@@ -55,7 +57,9 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/apache2/apache2.conf" }
+    - { dest: "/etc/apache2/conf-available/apache2-doc.conf" }
     - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+    - { dest: "/etc/apache2/conf-available/serve-cgi-bin.conf" }
     - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
     - { dest: "/etc/apache2/mods-available/remoteip.conf" }
     - { dest: "/etc/apache2/sites-available/000-default.conf" }
