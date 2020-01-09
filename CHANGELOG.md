@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Disable `apache2-doc.conf` and `serve-cgi-bin.conf`
+
 ## 2.4.41-2alvistack3 - 2019-11-05
 
 ### Major Changes
