@@ -1,0 +1,56 @@
+---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+_apache2_module:
+  - { state: "absent", name: "mpm_itk" }
+  - { state: "absent", name: "mpm_prefork" }
+  - { state: "absent", name: "mpm_worker" }
+  - { state: "absent", name: "proxy_html" }
+  - { state: "present", name: "mpm_event" }
+  - { state: "present", name: "access_compat" }
+  - { state: "present", name: "actions" }
+  - { state: "present", name: "alias" }
+  - { state: "present", name: "auth_basic" }
+  - { state: "present", name: "authn_core" }
+  - { state: "present", name: "authn_file" }
+  - { state: "present", name: "authz_core" }
+  - { state: "present", name: "authz_groupfile" }
+  - { state: "present", name: "authz_host" }
+  - { state: "present", name: "authz_user" }
+  - { state: "present", name: "autoindex" }
+  - { state: "present", name: "cache" }
+  - { state: "present", name: "cache_disk" }
+  - { state: "present", name: "deflate" }
+  - { state: "present", name: "dir" }
+  - { state: "present", name: "env" }
+  - { state: "present", name: "expires" }
+  - { state: "present", name: "filter" }
+  - { state: "present", name: "headers" }
+  - { state: "present", name: "log_config" }
+  - { state: "present", name: "logio" }
+  - { state: "present", name: "mime" }
+  - { state: "present", name: "mime_magic" }
+  - { state: "present", name: "negotiation" }
+  - { state: "present", name: "proxy" }
+  - { state: "present", name: "proxy_fcgi" }
+  - { state: "present", name: "proxy_http" }
+  - { state: "present", name: "remoteip" }
+  - { state: "present", name: "reqtimeout" }
+  - { state: "present", name: "rewrite" }
+  - { state: "present", name: "setenvif" }
+  - { state: "present", name: "status" }
+  - { state: "present", name: "unixd" }
+  - { state: "present", name: "version" }
