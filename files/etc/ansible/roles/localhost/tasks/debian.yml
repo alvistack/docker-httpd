@@ -14,40 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: include default variables
-  include_vars: "../vars/main.yml"
-  tags: localhost
-
-- name: include release specific variables
-  include_vars: "{{ lookup('first_found', _params) }}"
-  vars:
-    _params:
-      files:
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-        - "{{ ansible_distribution | lower }}.yml"
-        - "{{ ansible_os_family | lower }}.yml"
-      paths:
-        - "../vars"
-  ignore_errors: true
-  tags: localhost
-
-- name: include release specific tasks
-  include_tasks: "{{ lookup('first_found', _params) }}"
-  vars:
-    _params:
-      files:
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-        - "{{ ansible_distribution | lower }}.yml"
-        - "{{ ansible_os_family | lower }}.yml"
-      paths:
-        - "."
-  ignore_errors: true
-  tags: localhost
-
 - name: prepare directories
   file:
     dest: "{{ item.dest }}"
@@ -56,7 +22,10 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/usr/local/bin" }
+    - { dest: "/etc/apache2" }
+    - { dest: "/etc/apache2/conf-available" }
+    - { dest: "/etc/apache2/mods-available" }
+    - { dest: "/etc/apache2/sites-available" }
   tags: localhost
 
 - name: copy templates
@@ -67,7 +36,14 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
+    - { dest: "/etc/apache2/apache2.conf" }
+    - { dest: "/etc/apache2/conf-available/apache2-doc.conf" }
+    - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+    - { dest: "/etc/apache2/conf-available/serve-cgi-bin.conf" }
+    - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
+    - { dest: "/etc/apache2/mods-available/remoteip.conf" }
+    - { dest: "/etc/apache2/sites-available/000-default.conf" }
+    - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
   tags: localhost
 
 - name: prepare files
@@ -78,5 +54,23 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
+    - { dest: "/etc/apache2/apache2.conf" }
+    - { dest: "/etc/apache2/conf-available/apache2-doc.conf" }
+    - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+    - { dest: "/etc/apache2/conf-available/serve-cgi-bin.conf" }
+    - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
+    - { dest: "/etc/apache2/mods-available/remoteip.conf" }
+    - { dest: "/etc/apache2/sites-available/000-default.conf" }
+    - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
+  tags: localhost
+
+- name: a2enmod
+  apache2_module:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    force: true
+    ignore_configcheck: true
+  loop: "{{ _apache2_module }}"
+  changed_when: false
+  ignore_errors: true
   tags: localhost
