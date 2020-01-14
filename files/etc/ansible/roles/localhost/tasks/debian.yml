@@ -26,6 +26,7 @@
     - { dest: "/etc/apache2/conf-available" }
     - { dest: "/etc/apache2/mods-available" }
     - { dest: "/etc/apache2/sites-available" }
+    - { dest: "/var/www/html", owner: "www-data", group: "www-data" }
   tags: localhost
 
 - name: copy templates
@@ -35,10 +36,12 @@
     owner: "{{ item.owner | default('root') }}"
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
+    backup: true
   loop:
     - { dest: "/etc/apache2/apache2.conf" }
     - { dest: "/etc/apache2/conf-available/apache2-doc.conf" }
     - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+    - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
     - { dest: "/etc/apache2/conf-available/serve-cgi-bin.conf" }
     - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
     - { dest: "/etc/apache2/mods-available/remoteip.conf" }
@@ -57,6 +60,7 @@
     - { dest: "/etc/apache2/apache2.conf" }
     - { dest: "/etc/apache2/conf-available/apache2-doc.conf" }
     - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+    - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
     - { dest: "/etc/apache2/conf-available/serve-cgi-bin.conf" }
     - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
     - { dest: "/etc/apache2/mods-available/remoteip.conf" }
