@@ -4,7 +4,13 @@
 
 ### Major Changes
 
-  - Disable `apache2-doc.conf` and `serve-cgi-bin.conf`
+## 2.4.41-3alvistack1 - 2020-01-15
+
+### Major Changes
+
+  - Replace `dumb-init` with `tini`, as like as `docker --init`
+  - Include release specific vars and tasks
+  - Revamp with `a2enmod` and `a2enconf`
 
 ## 2.4.41-2alvistack3 - 2019-11-05
 

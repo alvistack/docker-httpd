@@ -24,7 +24,7 @@ WORKDIR /var/www/html
 
 EXPOSE 80
 
-ENTRYPOINT [ "dumb-init", "--", "docker-entrypoint.sh" ]
+ENTRYPOINT [ "tini", "-g", "--", "docker-entrypoint.sh" ]
 CMD        [ "apachectl", "-DFOREGROUND" ]
 
 # Hotfix for en_US.utf8 locale
