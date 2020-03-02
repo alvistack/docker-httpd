@@ -11,8 +11,7 @@ Learn more about Apache: <https://httpd.apache.org/>
 
 ## Supported Tags and Respective `Dockerfile` Links
 
-  - [`latest` (master/Dockerfile)](https://github.com/alvistack/docker-httpd/blob/master/Dockerfile)
-  - [`2.4` (2.4/Dockerfile)](https://github.com/alvistack/docker-httpd/blob/2.4/Dockerfile)
+  - [`2.4`, `latest`](https://github.com/alvistack/docker-httpd/blob/master/molecule/2.4/Dockerfile.j2)
 
 ## Overview
 
@@ -20,7 +19,8 @@ This Docker container makes it easy to get an instance of Apache up and running.
 
 Based on [Official Ubuntu Docker Image](https://hub.docker.com/_/ubuntu/) with some minor hack:
 
-  - Self initialize with Ansible, by dogfooding with Ansible Playbook
+  - Minimized `Dockerfile` for meta data definition
+  - Provision by Ansible and Molecule Docker driver in single layer
   - Handle `ENTRYPOINT` with [tini](https://github.com/krallin/tini)
   - Change `User` and `Group` to `www-data`
   - Change `DocumentRoot` to `/var/www/html`

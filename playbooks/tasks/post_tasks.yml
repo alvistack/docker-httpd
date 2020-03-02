@@ -14,56 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: prepare directories
-  file:
-    dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0755') }}"
-    state: "{{ item.state | default('directory') }}"
-  loop:
-    - { dest: "/etc/apache2" }
-    - { dest: "/etc/apache2/conf-available" }
-    - { dest: "/etc/apache2/mods-available" }
-    - { dest: "/etc/apache2/sites-available" }
-    - { dest: "/var/www/html", owner: "www-data", group: "www-data" }
-  tags: localhost
-
-- name: copy templates
-  template:
-    dest: "{{ item.dest }}"
-    src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0644') }}"
-    backup: true
-  loop:
-    - { dest: "/etc/apache2/apache2.conf" }
-    - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
-    - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
-    - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
-    - { dest: "/etc/apache2/mods-available/remoteip.conf" }
-    - { dest: "/etc/apache2/sites-available/000-default.conf" }
-    - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
-  tags: localhost
-
-- name: prepare files
-  file:
-    dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0644') }}"
-    state: "{{ item.state | default('file') }}"
-  loop:
-    - { dest: "/etc/apache2/apache2.conf" }
-    - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
-    - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
-    - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
-    - { dest: "/etc/apache2/mods-available/remoteip.conf" }
-    - { dest: "/etc/apache2/sites-available/000-default.conf" }
-    - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
-  tags: localhost
-
 - name: a2enconf
   shell: |
     set -o pipefail
@@ -79,7 +29,6 @@
     - { state: "present", name: "security" }
   changed_when: false
   ignore_errors: true
-  tags: localhost
 
 - name: a2enmod
   shell: |
@@ -124,4 +73,31 @@
     - { state: "present", name: "status" }
   changed_when: false
   ignore_errors: true
-  tags: localhost
+
+- name: prepare files
+  file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+    state: "{{ item.state | default('file') }}"
+  loop:
+    - { dest: "/etc/apache2/apache2.conf" }
+    - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+    - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
+    - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
+    - { dest: "/etc/apache2/mods-available/remoteip.conf" }
+    - { dest: "/etc/apache2/sites-available/000-default.conf" }
+    - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
+    - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
+    - { dest: "/usr/local/bin/gosu", mode: "0755" }
+    - { dest: "/usr/local/bin/tini", mode: "0755" }
+
+- name: flush cache
+  shell: |
+    set -o pipefail
+    rm -rf /var/lib/apt/lists/*
+  args:
+    executable: "/bin/bash"
+  changed_when: false
+  ignore_errors: true
