@@ -53,12 +53,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/etc/apache2" }
-    - { dest: "/etc/apache2/conf-available" }
-    - { dest: "/etc/apache2/mods-available" }
-    - { dest: "/etc/apache2/sites-available" }
     - { dest: "/usr/local/bin" }
-    - { dest: "/var/www/html", owner: "www-data", group: "www-data" }
 
 - name: copy templates
   template:
@@ -68,11 +63,14 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/apache2/apache2.conf" }
-    - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
-    - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
-    - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
-    - { dest: "/etc/apache2/mods-available/remoteip.conf" }
-    - { dest: "/etc/apache2/sites-available/000-default.conf" }
-    - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
+    - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
+
+- name: prepare files
+  file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+    state: "{{ item.state | default('file') }}"
+  loop:
     - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
