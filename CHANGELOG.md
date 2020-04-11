@@ -1,8 +1,14 @@
 # Docker Image Packaging for Apache
 
-## 2.4.41-XalvistackY - TBC
+## 2.4.43-XalvistackY - TBC
 
 ### Major Changes
+
+## 2.4.43-4alvistack1 - 2020-04-11
+
+### Major Changes
+
+  - Debug build
 
 ## 2.4.41-4alvistack4 - 2020-03-05
 

@@ -1,6 +1,6 @@
 # Docker Image Packaging for Apache HTTP Server
 
-[![Travis](https://img.shields.io/travis/alvistack/docker-httpd.svg)](https://travis-ci.org/alvistack/docker-httpd)
+[![Travis](https://img.shields.io/travis/com/alvistack/docker-httpd.svg)](https://travis-ci.com/alvistack/docker-httpd)
 [![GitHub release](https://img.shields.io/github/release/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/blob/master/LICENSE)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/httpd.svg)](https://hub.docker.com/r/alvistack/httpd/)
@@ -66,7 +66,7 @@ The `latest` tag matches the most recent [GitHub Release](https://github.com/alv
 
 ### `alvistack/httpd:<version>`
 
-The version tags are rolling release rebuild by [Travis](https://travis-ci.org/alvistack/docker-httpd) in weekly basis. Thus using these tags will ensure you are running the latest packages provided by the base image project.
+The version tags are rolling release rebuild by [Travis](https://travis-ci.com/alvistack/docker-httpd) in weekly basis. Thus using these tags will ensure you are running the latest packages provided by the base image project.
 
 ## License
 
