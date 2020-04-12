@@ -1,14 +1,15 @@
 # Docker Image Packaging for Apache
 
-## 2.4.43-XalvistackY - TBC
+## 2.4.41-XalvistackY - TBC
 
 ### Major Changes
 
-## 2.4.43-4alvistack2 - 2020-04-11
+## 2.4.41-4alvistack7 - 2020-04-12
 
 ### Major Changes
 
   - Provision with systemd support
+  - Upgrade base image to Ubuntu 20.04
 
 ## 2.4.41-4alvistack4 - 2020-03-05
 
