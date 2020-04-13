@@ -1,0 +1,141 @@
+---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: include default variables
+      include_vars: "./vars/main.yml"
+
+    - name: include release specific variables
+      include_vars: "{{ lookup('first_found', _params) }}"
+      vars:
+        _params:
+          files:
+            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+            - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+            - "{{ ansible_distribution | lower }}.yml"
+            - "{{ ansible_os_family | lower }}.yml"
+          paths:
+            - "./vars"
+      ignore_errors: true
+
+    - name: prepare directories
+      file:
+        dest: "{{ item.dest }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0755') }}"
+        state: "{{ item.state | default('directory') }}"
+      loop:
+        - { dest: "/etc/apache2" }
+        - { dest: "/etc/apache2/conf-available" }
+        - { dest: "/etc/apache2/mods-available" }
+        - { dest: "/etc/apache2/sites-available" }
+        - { dest: "/var/www/html", owner: "www-data", group: "www-data" }
+
+    - name: copy templates
+      template:
+        dest: "{{ item.dest }}"
+        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - { dest: "/etc/apache2/apache2.conf" }
+        - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+        - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
+        - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
+        - { dest: "/etc/apache2/mods-available/remoteip.conf" }
+        - { dest: "/etc/apache2/sites-available/000-default.conf" }
+        - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
+
+    - name: a2enconf
+      shell: |
+        set -o pipefail
+        {{ (item.state == 'present') | ternary('a2enconf', 'a2disconf') }} --quiet {{ item.name }}
+      args:
+        executable: "/bin/bash"
+      loop:
+        - { state: "absent", name: "apache2-doc" }
+        - { state: "absent", name: "charset" }
+        - { state: "absent", name: "localized-error-pages" }
+        - { state: "absent", name: "serve-cgi-bin" }
+        - { state: "present", name: "other-vhosts-access-log" }
+        - { state: "present", name: "security" }
+      changed_when: false
+      ignore_errors: true
+
+    - name: a2enmod
+      shell: |
+        set -o pipefail
+        {{ (item.state == 'present') | ternary('a2enmod', 'a2dismod') }} --quiet {{ item.name }}
+      args:
+        executable: "/bin/bash"
+      loop:
+        - { state: "absent", name: "mpm_prefork" }
+        - { state: "absent", name: "mpm_worker" }
+        - { state: "absent", name: "proxy_html" }
+        - { state: "present", name: "mpm_event" }
+        - { state: "present", name: "access_compat" }
+        - { state: "present", name: "actions" }
+        - { state: "present", name: "alias" }
+        - { state: "present", name: "auth_basic" }
+        - { state: "present", name: "authn_core" }
+        - { state: "present", name: "authn_file" }
+        - { state: "present", name: "authz_core" }
+        - { state: "present", name: "authz_groupfile" }
+        - { state: "present", name: "authz_host" }
+        - { state: "present", name: "authz_user" }
+        - { state: "present", name: "autoindex" }
+        - { state: "present", name: "cache" }
+        - { state: "present", name: "cache_disk" }
+        - { state: "present", name: "deflate" }
+        - { state: "present", name: "dir" }
+        - { state: "present", name: "env" }
+        - { state: "present", name: "expires" }
+        - { state: "present", name: "filter" }
+        - { state: "present", name: "headers" }
+        - { state: "present", name: "mime" }
+        - { state: "present", name: "mime_magic" }
+        - { state: "present", name: "negotiation" }
+        - { state: "present", name: "proxy" }
+        - { state: "present", name: "proxy_fcgi" }
+        - { state: "present", name: "proxy_http" }
+        - { state: "present", name: "remoteip" }
+        - { state: "present", name: "reqtimeout" }
+        - { state: "present", name: "rewrite" }
+        - { state: "present", name: "setenvif" }
+        - { state: "present", name: "status" }
+      changed_when: false
+      ignore_errors: true
+
+    - name: prepare files
+      file:
+        dest: "{{ item.dest }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+        state: "{{ item.state | default('file') }}"
+      loop:
+        - { dest: "/etc/apache2/apache2.conf" }
+        - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
+        - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
+        - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
+        - { dest: "/etc/apache2/mods-available/remoteip.conf" }
+        - { dest: "/etc/apache2/sites-available/000-default.conf" }
+        - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
