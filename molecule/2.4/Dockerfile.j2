@@ -45,5 +45,5 @@ WORKDIR /var/www/html
 
 EXPOSE 80
 
-ENTRYPOINT [ "tini", "-g", "--", "docker-entrypoint.sh" ]
+ENTRYPOINT [ "catatonit", "-g", "--", "docker-entrypoint.sh" ]
 CMD        [ "apachectl", "-DFOREGROUND" ]
