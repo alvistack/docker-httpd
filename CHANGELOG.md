@@ -1,6 +1,6 @@
 # Docker Image Packaging for Apache
 
-## 2.4.41-XalvistackY - TBC
+## 2.4.43-XalvistackY - TBC
 
 ### Major Changes
 
