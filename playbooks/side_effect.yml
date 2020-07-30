@@ -116,6 +116,7 @@
         - { state: "present", name: "proxy" }
         - { state: "present", name: "proxy_fcgi" }
         - { state: "present", name: "proxy_http" }
+        - { state: "present", name: "proxy_wstunnel" }
         - { state: "present", name: "remoteip" }
         - { state: "present", name: "reqtimeout" }
         - { state: "present", name: "rewrite" }
