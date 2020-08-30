@@ -46,6 +46,7 @@
         - { dest: "/etc/apache2/conf-available" }
         - { dest: "/etc/apache2/mods-available" }
         - { dest: "/etc/apache2/sites-available" }
+        - { dest: "/run/apache2" }
         - { dest: "/var/www/html", owner: "www-data", group: "www-data" }
 
     - name: copy templates
