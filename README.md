@@ -9,9 +9,9 @@ The Apache HTTP Server Project is an effort to develop and maintain an open-sour
 
 Learn more about Apache: <https://httpd.apache.org/>
 
-## Supported Tags and Respective `Dockerfile` Links
+## Supported Tags and Respective Packer Template Links
 
-  - [`2.4`, `latest`](https://github.com/alvistack/docker-httpd/blob/master/molecule/2.4/Dockerfile.j2)
+  - [`2.4`, `latest`](https://github.com/alvistack/docker-httpd/blob/master/packer/2.4/packer.json)
 
 ## Overview
 
@@ -19,8 +19,7 @@ This Docker container makes it easy to get an instance of Apache up and running.
 
 Based on [Official Ubuntu Docker Image](https://hub.docker.com/_/ubuntu/) with some minor hack:
 
-  - Minimized `Dockerfile` for meta data definition
-  - Provision by Ansible and Molecule Docker driver in single layer
+  - Packaging by Packer Docker builder and Ansible provisioner in single layer
   - Handle `ENTRYPOINT` with [catatonit](https://github.com/openSUSE/catatonit)
   - Change `User` and `Group` to `www-data`
   - Change `DocumentRoot` to `/var/www/html`
