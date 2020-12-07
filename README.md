@@ -11,7 +11,7 @@ Learn more about Apache: <https://httpd.apache.org/>
 
 ## Supported Tags and Respective Packer Template Links
 
-  - [`2.4`, `latest`](https://github.com/alvistack/docker-httpd/blob/master/packer/2.4/packer.json)
+  - [`2.4`, `latest`](https://github.com/alvistack/docker-httpd/blob/master/packer/docker-2.4/packer.json)
 
 ## Overview
 
