@@ -99,7 +99,7 @@
 
     - name: a2enconf
       shell: |
-        set -o pipefail
+        set -euo pipefail
         {{ (item.state == 'present') | ternary('a2enconf', 'a2disconf') }} --quiet {{ item.name }}
       args:
         executable: "/bin/bash"
@@ -115,7 +115,7 @@
 
     - name: a2enmod
       shell: |
-        set -o pipefail
+        set -euo pipefail
         {{ (item.state == 'present') | ternary('a2enmod', 'a2dismod') }} --quiet {{ item.name }}
       args:
         executable: "/bin/bash"
