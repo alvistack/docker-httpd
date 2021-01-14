@@ -1,9 +1,9 @@
 # Docker Image Packaging for Apache HTTP Server
 
-[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/docker-httpd/master)](https://gitlab.com/alvistack/docker-httpd/-/pipelines)
+[![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/docker-httpd/master)](https://gitlab.com/alvistack/docker-httpd/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/blob/master/LICENSE)
-[![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/httpd.svg)](https://hub.docker.com/r/alvistack/httpd/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/httpd-2.4.svg)](https://hub.docker.com/r/alvistack/httpd-2.4/)
 
 The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.
 
@@ -11,7 +11,8 @@ Learn more about Apache: <https://httpd.apache.org/>
 
 ## Supported Tags and Respective Packer Template Links
 
-  - [`2.4`, `latest`](https://github.com/alvistack/docker-httpd/blob/master/packer/docker-2.4/packer.json)
+  - [`alvistack/httpd-2.4`](https://hub.docker.com/r/alvistack/httpd-2.4)
+      - [`packer/docker-2.4/packer.json`](https://github.com/alvistack/docker-httpd/blob/master/packer/docker-2.4/packer.json)
 
 ## Overview
 
@@ -59,13 +60,13 @@ Start Apache:
 
 ## Versioning
 
-### `alvistack/httpd:latest`
+### `YYYYMMDD.Y.Z`
 
-The `latest` tag matches the most recent [GitHub Release](https://github.com/alvistack/docker-httpd/releases) of this repository. Thus using `alvistack/httpd:latest` or `alvistack/httpd` will ensure you are running the most up to date stable version of this image.
+Release tags could be find from [GitHub Release](https://github.com/alvistack/docker-httpd/releases) of this repository. Thus using these tags will ensure you are running the most up to date stable version of this image.
 
-### `alvistack/httpd:<version>`
+### `YYYYMMDD.0.0`
 
-The version tags are rolling release rebuild by [Travis](https://travis-ci.com/alvistack/docker-httpd) in weekly basis. Thus using these tags will ensure you are running the latest packages provided by the base image project.
+Version tags ended with `.0.0` are rolling release rebuild by [GitLab pipeline](https://gitlab.com/alvistack/docker-httpd/-/pipelines) in weekly basis. Thus using these tags will ensure you are running the latest packages provided by the base image project.
 
 ## License
 
