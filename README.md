@@ -46,7 +46,7 @@ For the `VOLUME` directory that is used to store the repository data (amongst ot
 Start Apache:
 
     # Pull latest image
-    docker pull alvistack/httpd
+    docker pull alvistack/httpd-2.4
     
     # Run as detach
     docker run \
@@ -54,7 +54,7 @@ Start Apache:
         --name httpd \
         --publish 80:80 \
         --volume /var/www/html:/var/www/html \
-        alvistack/httpd
+        alvistack/httpd-2.4
 
 **Success**. Apache is now available on port <http://localhost>.
 
