@@ -33,7 +33,7 @@
             - "{{ ansible_os_family | lower }}.yml"
           paths:
             - "./vars"
-      ignore_errors: true
+      failed_when: false
 
     - name: include release specific tasks
       include_tasks: "{{ lookup('first_found', _params) }}"
@@ -47,7 +47,7 @@
             - "{{ ansible_os_family | lower }}.yml"
           paths:
             - "./tasks"
-      ignore_errors: true
+      failed_when: false
 
     - name: include default tasks
       include_tasks: "./tasks/main.yml"
@@ -121,7 +121,7 @@
         - { state: "present", name: "other-vhosts-access-log" }
         - { state: "present", name: "security" }
       changed_when: false
-      ignore_errors: true
+      failed_when: false
 
     - name: a2enmod
       shell: |
@@ -166,7 +166,7 @@
         - { state: "present", name: "setenvif" }
         - { state: "present", name: "status" }
       changed_when: false
-      ignore_errors: true
+      failed_when: false
 
     - name: prepare files
       file:
