@@ -4,9 +4,7 @@
 [![GitHub release](https://img.shields.io/github/release/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/blob/master/LICENSE)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/httpd-2.4.svg)](https://hub.docker.com/r/alvistack/httpd-2.4/)
-
 The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.
-
 Learn more about Apache: <https://httpd.apache.org/>
 
 ## Supported Tags and Respective Packer Template Links
@@ -17,7 +15,6 @@ Learn more about Apache: <https://httpd.apache.org/>
 ## Overview
 
 This Docker container makes it easy to get an instance of Apache up and running.
-
 Based on [Official Ubuntu Docker Image](https://hub.docker.com/_/ubuntu/) with some minor hack:
 
   - Packaging by Packer Docker builder and Ansible provisioner in single layer
@@ -42,20 +39,16 @@ Based on [Official Ubuntu Docker Image](https://hub.docker.com/_/ubuntu/) with s
 ### Quick Start
 
 For the `VOLUME` directory that is used to store the repository data (amongst other things) we recommend mounting a host directory as a [data volume](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes), or via a named volume if using a docker version \>= 1.9.
-
 Start Apache:
-
-    # Pull latest image
-    docker pull alvistack/httpd-2.4
-    
-    # Run as detach
-    docker run \
-        -itd \
-        --name httpd \
-        --publish 80:80 \
-        --volume /var/www/html:/var/www/html \
-        alvistack/httpd-2.4
-
+\# Pull latest image
+docker pull alvistack/httpd-2.4
+\# Run as detach
+docker run   
+\-itd   
+\--name httpd   
+\--publish 80:80   
+\--volume /var/www/html:/var/www/html   
+alvistack/httpd-2.4
 **Success**. Apache is now available on port <http://localhost>.
 
 ## Versioning
