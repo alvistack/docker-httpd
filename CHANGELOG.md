@@ -4,7 +4,11 @@
 
 ### Major Changes
 
-  - Upgrade minimal Ansible community package support to 4.1.0
+## 20210718.1.1 - 2021-07-18
+
+### Major Changes
+
+  - Upgrade minimal Ansible community package support to 4.2.0
 
 ## 20210602.1.1 - 2021-06-02
 
@@ -16,9 +20,12 @@
 
 ### Major Changes
 
-  - Bugfix [ansible-lint `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
-  - Bugfix [ansible-lint `no-handler`](https://github.com/ansible-community/ansible-lint/pull/1402)
-  - Bugfix [ansible-lint `unnamed-task`](https://github.com/ansible-community/ansible-lint/pull/1413)
+  - Bugfix [ansible-lint
+    `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
+  - Bugfix [ansible-lint
+    `no-handler`](https://github.com/ansible-community/ansible-lint/pull/1402)
+  - Bugfix [ansible-lint
+    `unnamed-task`](https://github.com/ansible-community/ansible-lint/pull/1413)
   - Change GIT tag as per Vagrant Box naming and versioning limitation
 
 ## 2.4.46-4alvistack8 - 2020-12-09
@@ -109,7 +116,8 @@
   - Update dumb-init to v.1.2.2
   - Remove Debian style Apache configuration
   - Remove legacy default /usr/local/apache2/conf/extra/\*.conf
-  - Implement required changes directly to /usr/local/apache2/conf/httpd.conf
+  - Implement required changes directly to
+    /usr/local/apache2/conf/httpd.conf
   - Add more default enabled Apache modules
 
 ## 2.4.29-0alvistack1 - 2018-03-15
