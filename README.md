@@ -3,7 +3,7 @@
 <img src="/alvistack.svg" width="75" alt="AlviStack">
 
 [![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/docker-httpd/master)](https://gitlab.com/alvistack/docker-httpd/-/pipelines)
-[![GitHub release](https://img.shields.io/github/release/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/releases)
+[![GitHub tag](https://img.shields.io/github/tag/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/tags)
 [![GitHub license](https://img.shields.io/github/license/alvistack/docker-httpd.svg)](https://github.com/alvistack/docker-httpd/blob/master/LICENSE)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/httpd-2.4.svg)](https://hub.docker.com/r/alvistack/httpd-2.4/)
 
@@ -64,7 +64,7 @@ Start Apache:
 
 ### `YYYYMMDD.Y.Z`
 
-Release tags could be find from [GitHub Release](https://github.com/alvistack/docker-httpd/releases) of this repository. Thus using these tags will ensure you are running the most up to date stable version of this image.
+Release tags could be find from [GitHub Release](https://github.com/alvistack/docker-httpd/tags) of this repository. Thus using these tags will ensure you are running the most up to date stable version of this image.
 
 ### `YYYYMMDD.0.0`
 
