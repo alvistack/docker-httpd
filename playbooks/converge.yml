@@ -19,10 +19,10 @@
   become: true
   tasks:
     - name: include default variables
-      include_vars: "./vars/main.yml"
+      ansible.builtin.include_vars: "./vars/main.yml"
 
     - name: include release specific variables
-      include_vars: "{{ _loop_var }}"
+      ansible.builtin.include_vars: "{{ _loop_var }}"
       loop: "{{ query('first_found', _params) }}"
       loop_control:
         loop_var: _loop_var
@@ -61,38 +61,38 @@
       include_tasks: "./tasks/main.yml"
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: python
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: ansible
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: locales
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: timezone
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: catatonit
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: gosu
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: httpd
 
     - name: prepare directories
-      file:
+      ansible.builtin.file:
         dest: "{{ item.dest }}"
         owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
+        ansible.builtin.group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0755') }}"
         state: "{{ item.state | default('directory') }}"
       loop:
@@ -104,11 +104,11 @@
         - { dest: "/var/www/html", owner: "www-data", group: "www-data" }
 
     - name: copy templates
-      template:
+      ansible.builtin.template:
         dest: "{{ item.dest }}"
         src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
         owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
+        ansible.builtin.group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
       loop:
         - { dest: "/etc/apache2/apache2.conf" }
@@ -120,7 +120,7 @@
         - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
 
     - name: a2enconf
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         {{ (item.state == 'present') | ternary('a2enconf', 'a2disconf') }} --quiet {{ item.name }}
       args:
@@ -136,7 +136,7 @@
       failed_when: false
 
     - name: a2enmod
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         {{ (item.state == 'present') | ternary('a2enmod', 'a2dismod') }} --quiet {{ item.name }}
       args:
@@ -181,10 +181,10 @@
       failed_when: false
 
     - name: prepare files
-      file:
+      ansible.builtin.file:
         dest: "{{ item.dest }}"
         owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
+        ansible.builtin.group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
         state: "{{ item.state | default('file') }}"
       loop:
