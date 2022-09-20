@@ -15,7 +15,7 @@
 # limitations under the License.
 
 namespace: alvistack
-name: docker-httpd
+name: httpd
 description: Docker Image Packaging for Apache
 
 version: 0.0.0
