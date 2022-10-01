@@ -142,7 +142,7 @@ build:httpd-2.4-docker:
     paths:
       - packer/*/output-docker
   variables:
-    _IMAGE: "devel-22.10"
+    _IMAGE: "httpd-2.4"
     _PROVIDER: "docker"
 
 test:httpd-2.4-docker:
@@ -154,7 +154,7 @@ test:httpd-2.4-docker:
       - packer/*/output-docker
     policy: pull
   variables:
-    _IMAGE: "devel-22.10"
+    _IMAGE: "httpd-2.4"
     _PROVIDER: "docker"
   needs:
     - build:httpd-2.4-docker
@@ -168,7 +168,7 @@ deploy:httpd-2.4-docker:
       - packer/*/output-docker
     policy: pull
   variables:
-    _IMAGE: "devel-22.10"
+    _IMAGE: "httpd-2.4"
     _PROVIDER: "docker"
   needs:
     - test:httpd-2.4-docker
