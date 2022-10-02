@@ -121,9 +121,10 @@
         - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
 
     - name: a2enconf
-      ansible.builtin.shell: |
-        set -euxo pipefail
-        {{ (item.state == 'present') | ternary('a2enconf', 'a2disconf') }} --quiet {{ item.name }}
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          {{ (item.state == 'present') | ternary('a2enconf', 'a2disconf') }} --quiet {{ item.name }}
       args:
         executable: "/bin/bash"
       loop:
@@ -137,9 +138,10 @@
       failed_when: false
 
     - name: a2enmod
-      ansible.builtin.shell: |
-        set -euxo pipefail
-        {{ (item.state == 'present') | ternary('a2enmod', 'a2dismod') }} --quiet {{ item.name }}
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          {{ (item.state == 'present') | ternary('a2enmod', 'a2dismod') }} --quiet {{ item.name }}
       args:
         executable: "/bin/bash"
       loop:
