@@ -13,8 +13,8 @@ Learn more about Apache: <https://httpd.apache.org/>
 
 ## Supported Tags and Respective Packer Template Links
 
-  - [`alvistack/httpd-2.4`](https://hub.docker.com/r/alvistack/httpd-2.4)
-      - [`packer/docker-2.4/packer.json`](https://github.com/alvistack/docker-httpd/blob/master/packer/docker-2.4/packer.json)
+-   [`alvistack/httpd-2.4`](https://hub.docker.com/r/alvistack/httpd-2.4)
+    -   [`packer/docker-2.4/packer.json`](https://github.com/alvistack/docker-httpd/blob/master/packer/docker-2.4/packer.json)
 
 ## Overview
 
@@ -22,24 +22,24 @@ This Docker container makes it easy to get an instance of Apache up and running.
 
 Based on [Official Ubuntu Docker Image](https://hub.docker.com/_/ubuntu/) with some minor hack:
 
-  - Packaging by Packer Docker builder and Ansible provisioner in single layer
-  - Handle `ENTRYPOINT` with [catatonit](https://github.com/openSUSE/catatonit)
-  - Change `User` and `Group` to `www-data`
-  - Change `DocumentRoot` to `/var/www/html`
-  - Additional Apache modules:
-      - actions
-      - cache
-      - cache\_disk
-      - deflate
-      - expires
-      - logio
-      - mime\_magic
-      - negotiation
-      - proxy
-      - proxy\_fcgi
-      - proxy\_http
-      - remoteip
-      - rewrite
+-   Packaging by Packer Docker builder and Ansible provisioner in single layer
+-   Handle `ENTRYPOINT` with [catatonit](https://github.com/openSUSE/catatonit)
+-   Change `User` and `Group` to `www-data`
+-   Change `DocumentRoot` to `/var/www/html`
+-   Additional Apache modules:
+    -   actions
+    -   cache
+    -   cache_disk
+    -   deflate
+    -   expires
+    -   logio
+    -   mime_magic
+    -   negotiation
+    -   proxy
+    -   proxy_fcgi
+    -   proxy_http
+    -   remoteip
+    -   rewrite
 
 ### Quick Start
 
@@ -49,7 +49,7 @@ Start Apache:
 
     # Pull latest image
     docker pull alvistack/httpd-2.4
-    
+
     # Run as detach
     docker run \
         -itd \
@@ -72,11 +72,11 @@ Version tags ended with `.0.0` are rolling release rebuild by [GitLab pipeline](
 
 ## License
 
-  - Code released under [Apache License 2.0](LICENSE)
-  - Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
+-   Code released under [Apache License 2.0](LICENSE)
+-   Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
 
 ## Author Information
 
-  - Wong Hoi Sing Edison
-      - <https://twitter.com/hswong3i>
-      - <https://github.com/hswong3i>
+-   Wong Hoi Sing Edison
+    -   <https://twitter.com/hswong3i>
+    -   <https://github.com/hswong3i>
