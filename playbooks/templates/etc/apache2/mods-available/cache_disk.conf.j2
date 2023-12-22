@@ -24,6 +24,13 @@
     CacheDirLevels 2
     CacheDirLength 1
 
+	# Microcaching for Apache
+	CacheDefaultExpire 1
+	CacheLockMaxAge 600
+	CacheMaxExpire 600
+	CacheLock on
+	CacheStaleOnError on
+
 </IfModule>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
