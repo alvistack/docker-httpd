@@ -40,8 +40,6 @@ Image](https://hub.docker.com/_/ubuntu/) with some minor hack:
 -   Change `DocumentRoot` to `/var/www/html`
 -   Additional Apache modules:
     -   actions
-    -   cache
-    -   cache_disk
     -   deflate
     -   expires
     -   logio

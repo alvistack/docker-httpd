@@ -115,7 +115,6 @@
         - { dest: "/etc/apache2/apache2.conf" }
         - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
         - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
-        - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
         - { dest: "/etc/apache2/mods-available/remoteip.conf" }
         - { dest: "/etc/apache2/sites-available/000-default.conf" }
         - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
@@ -145,6 +144,8 @@
       args:
         executable: "/bin/bash"
       loop:
+        - { state: "absent", name: "cache" }
+        - { state: "absent", name: "cache_disk" }
         - { state: "absent", name: "mpm_prefork" }
         - { state: "absent", name: "mpm_worker" }
         - { state: "absent", name: "proxy_html" }
@@ -160,8 +161,6 @@
         - { state: "present", name: "authz_host" }
         - { state: "present", name: "authz_user" }
         - { state: "present", name: "autoindex" }
-        - { state: "present", name: "cache" }
-        - { state: "present", name: "cache_disk" }
         - { state: "present", name: "deflate" }
         - { state: "present", name: "dir" }
         - { state: "present", name: "env" }
@@ -194,7 +193,6 @@
         - { dest: "/etc/apache2/apache2.conf" }
         - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
         - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
-        - { dest: "/etc/apache2/mods-available/cache_disk.conf" }
         - { dest: "/etc/apache2/mods-available/remoteip.conf" }
         - { dest: "/etc/apache2/sites-available/000-default.conf" }
         - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
