@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +19,7 @@
   become: true
   tasks:
     - name: include default variables
-      ansible.builtin.include_vars: "./vars/main.yml"
+      ansible.builtin.include_vars: ./vars/main.yml
 
     - name: include release specific variables
       ansible.builtin.include_vars: "{{ _loop_var }}"
@@ -37,7 +36,7 @@
             - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
             - "{{ ansible_os_family | lower }}.yml"
           paths:
-            - "./vars"
+            - ./vars
           skip: true
 
     - name: include release specific tasks
@@ -55,11 +54,11 @@
             - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
             - "{{ ansible_os_family | lower }}.yml"
           paths:
-            - "./tasks"
+            - ./tasks
           skip: true
 
     - name: include default tasks
-      ansible.builtin.include_tasks: "./tasks/main.yml"
+      ansible.builtin.include_tasks: ./tasks/main.yml
 
     - name: include role
       ansible.builtin.include_role:
@@ -97,12 +96,12 @@
         mode: "{{ item.mode | default('0755') }}"
         state: "{{ item.state | default('directory') }}"
       loop:
-        - { dest: "/etc/apache2" }
-        - { dest: "/etc/apache2/conf-available" }
-        - { dest: "/etc/apache2/mods-available" }
-        - { dest: "/etc/apache2/sites-available" }
-        - { dest: "/run/apache2" }
-        - { dest: "/var/www/html", owner: "www-data", group: "www-data" }
+        - { dest: /etc/apache2 }
+        - { dest: /etc/apache2/conf-available }
+        - { dest: /etc/apache2/mods-available }
+        - { dest: /etc/apache2/sites-available }
+        - { dest: /run/apache2 }
+        - { dest: /var/www/html, owner: www-data, group: www-data }
 
     - name: copy templates
       ansible.builtin.template:
@@ -112,12 +111,12 @@
         group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
       loop:
-        - { dest: "/etc/apache2/apache2.conf" }
-        - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
-        - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
-        - { dest: "/etc/apache2/mods-available/remoteip.conf" }
-        - { dest: "/etc/apache2/sites-available/000-default.conf" }
-        - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
+        - { dest: /etc/apache2/apache2.conf }
+        - { dest: /etc/apache2/conf-available/other-vhosts-access-log.conf }
+        - { dest: /etc/apache2/conf-available/php-fpm.conf }
+        - { dest: /etc/apache2/mods-available/remoteip.conf }
+        - { dest: /etc/apache2/sites-available/000-default.conf }
+        - { dest: /etc/apache2/sites-available/default-ssl.conf }
 
     - name: a2enconf
       ansible.builtin.shell:
@@ -125,14 +124,14 @@
           set -euxo pipefail
           {{ (item.state == 'present') | ternary('a2enconf', 'a2disconf') }} --quiet {{ item.name }}
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       loop:
-        - { state: "absent", name: "apache2-doc" }
-        - { state: "absent", name: "charset" }
-        - { state: "absent", name: "localized-error-pages" }
-        - { state: "absent", name: "serve-cgi-bin" }
-        - { state: "present", name: "other-vhosts-access-log" }
-        - { state: "present", name: "security" }
+        - { state: absent, name: apache2-doc }
+        - { state: absent, name: charset }
+        - { state: absent, name: localized-error-pages }
+        - { state: absent, name: serve-cgi-bin }
+        - { state: present, name: other-vhosts-access-log }
+        - { state: present, name: security }
       changed_when: false
       failed_when: false
 
@@ -142,43 +141,43 @@
           set -euxo pipefail
           {{ (item.state == 'present') | ternary('a2enmod', 'a2dismod') }} --quiet {{ item.name }}
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       loop:
-        - { state: "absent", name: "cache" }
-        - { state: "absent", name: "cache_disk" }
-        - { state: "absent", name: "mpm_prefork" }
-        - { state: "absent", name: "mpm_worker" }
-        - { state: "absent", name: "proxy_html" }
-        - { state: "present", name: "mpm_event" }
-        - { state: "present", name: "access_compat" }
-        - { state: "present", name: "actions" }
-        - { state: "present", name: "alias" }
-        - { state: "present", name: "auth_basic" }
-        - { state: "present", name: "authn_core" }
-        - { state: "present", name: "authn_file" }
-        - { state: "present", name: "authz_core" }
-        - { state: "present", name: "authz_groupfile" }
-        - { state: "present", name: "authz_host" }
-        - { state: "present", name: "authz_user" }
-        - { state: "present", name: "autoindex" }
-        - { state: "present", name: "deflate" }
-        - { state: "present", name: "dir" }
-        - { state: "present", name: "env" }
-        - { state: "present", name: "expires" }
-        - { state: "present", name: "filter" }
-        - { state: "present", name: "headers" }
-        - { state: "present", name: "mime" }
-        - { state: "present", name: "mime_magic" }
-        - { state: "present", name: "negotiation" }
-        - { state: "present", name: "proxy" }
-        - { state: "present", name: "proxy_fcgi" }
-        - { state: "present", name: "proxy_http" }
-        - { state: "present", name: "proxy_wstunnel" }
-        - { state: "present", name: "remoteip" }
-        - { state: "present", name: "reqtimeout" }
-        - { state: "present", name: "rewrite" }
-        - { state: "present", name: "setenvif" }
-        - { state: "present", name: "status" }
+        - { state: absent, name: cache }
+        - { state: absent, name: cache_disk }
+        - { state: absent, name: mpm_prefork }
+        - { state: absent, name: mpm_worker }
+        - { state: absent, name: proxy_html }
+        - { state: present, name: mpm_event }
+        - { state: present, name: access_compat }
+        - { state: present, name: actions }
+        - { state: present, name: alias }
+        - { state: present, name: auth_basic }
+        - { state: present, name: authn_core }
+        - { state: present, name: authn_file }
+        - { state: present, name: authz_core }
+        - { state: present, name: authz_groupfile }
+        - { state: present, name: authz_host }
+        - { state: present, name: authz_user }
+        - { state: present, name: autoindex }
+        - { state: present, name: deflate }
+        - { state: present, name: dir }
+        - { state: present, name: env }
+        - { state: present, name: expires }
+        - { state: present, name: filter }
+        - { state: present, name: headers }
+        - { state: present, name: mime }
+        - { state: present, name: mime_magic }
+        - { state: present, name: negotiation }
+        - { state: present, name: proxy }
+        - { state: present, name: proxy_fcgi }
+        - { state: present, name: proxy_http }
+        - { state: present, name: proxy_wstunnel }
+        - { state: present, name: remoteip }
+        - { state: present, name: reqtimeout }
+        - { state: present, name: rewrite }
+        - { state: present, name: setenvif }
+        - { state: present, name: status }
       changed_when: false
       failed_when: false
 
@@ -190,9 +189,9 @@
         mode: "{{ item.mode | default('0644') }}"
         state: "{{ item.state | default('file') }}"
       loop:
-        - { dest: "/etc/apache2/apache2.conf" }
-        - { dest: "/etc/apache2/conf-available/other-vhosts-access-log.conf" }
-        - { dest: "/etc/apache2/conf-available/php-fpm.conf" }
-        - { dest: "/etc/apache2/mods-available/remoteip.conf" }
-        - { dest: "/etc/apache2/sites-available/000-default.conf" }
-        - { dest: "/etc/apache2/sites-available/default-ssl.conf" }
+        - { dest: /etc/apache2/apache2.conf }
+        - { dest: /etc/apache2/conf-available/other-vhosts-access-log.conf }
+        - { dest: /etc/apache2/conf-available/php-fpm.conf }
+        - { dest: /etc/apache2/mods-available/remoteip.conf }
+        - { dest: /etc/apache2/sites-available/000-default.conf }
+        - { dest: /etc/apache2/sites-available/default-ssl.conf }

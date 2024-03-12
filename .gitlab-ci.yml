@@ -138,24 +138,24 @@ build:httpd-2.4-docker:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-httpd-2.4-docker"
+    key: $CI_PIPELINE_ID-httpd-2.4-docker
     paths:
       - packer/*/output-docker
   variables:
-    _IMAGE: "httpd-2.4"
-    _PROVIDER: "docker"
+    _IMAGE: httpd-2.4
+    _PROVIDER: docker
 
 test:httpd-2.4-docker:
   <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-httpd-2.4-docker"
+    key: $CI_PIPELINE_ID-httpd-2.4-docker
     paths:
       - packer/*/output-docker
     policy: pull
   variables:
-    _IMAGE: "httpd-2.4"
-    _PROVIDER: "docker"
+    _IMAGE: httpd-2.4
+    _PROVIDER: docker
   needs:
     - build:httpd-2.4-docker
 
@@ -163,12 +163,12 @@ deploy:httpd-2.4-docker:
   <<: *job-docker-push
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-httpd-2.4-docker"
+    key: $CI_PIPELINE_ID-httpd-2.4-docker
     paths:
       - packer/*/output-docker
     policy: pull
   variables:
-    _IMAGE: "httpd-2.4"
-    _PROVIDER: "docker"
+    _IMAGE: httpd-2.4
+    _PROVIDER: docker
   needs:
     - test:httpd-2.4-docker
