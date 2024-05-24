@@ -21,8 +21,8 @@ Learn more about Apache: <https://httpd.apache.org/>
 
 ## Supported Tags and Respective Packer Template Links
 
--   [`alvistack/httpd-2.4`](https://hub.docker.com/r/alvistack/httpd-2.4)
-    -   [`packer/docker-2.4/packer.json`](https://github.com/alvistack/docker-httpd/blob/master/packer/docker-2.4/packer.json)
+- [`alvistack/httpd-2.4`](https://hub.docker.com/r/alvistack/httpd-2.4)
+  - [`packer/docker-2.4/packer.json`](https://github.com/alvistack/docker-httpd/blob/master/packer/docker-2.4/packer.json)
 
 ## Overview
 
@@ -32,24 +32,24 @@ running.
 Based on [Official Ubuntu Docker
 Image](https://hub.docker.com/_/ubuntu/) with some minor hack:
 
--   Packaging by Packer Docker builder and Ansible provisioner in single
-    layer
--   Handle `ENTRYPOINT` with
-    [catatonit](https://github.com/openSUSE/catatonit)
--   Change `User` and `Group` to `www-data`
--   Change `DocumentRoot` to `/var/www/html`
--   Additional Apache modules:
-    -   actions
-    -   deflate
-    -   expires
-    -   logio
-    -   mime_magic
-    -   negotiation
-    -   proxy
-    -   proxy_fcgi
-    -   proxy_http
-    -   remoteip
-    -   rewrite
+- Packaging by Packer Docker builder and Ansible provisioner in single
+  layer
+- Handle `ENTRYPOINT` with
+  [catatonit](https://github.com/openSUSE/catatonit)
+- Change `User` and `Group` to `www-data`
+- Change `DocumentRoot` to `/var/www/html`
+- Additional Apache modules:
+  - actions
+  - deflate
+  - expires
+  - logio
+  - mime_magic
+  - negotiation
+  - proxy
+  - proxy_fcgi
+  - proxy_http
+  - remoteip
+  - rewrite
 
 ### Quick Start
 
@@ -91,12 +91,12 @@ latest packages provided by the base image project.
 
 ## License
 
--   Code released under [Apache License 2.0](LICENSE)
--   Docs released under [CC BY
-    4.0](http://creativecommons.org/licenses/by/4.0/)
+- Code released under [Apache License 2.0](LICENSE)
+- Docs released under [CC BY
+  4.0](http://creativecommons.org/licenses/by/4.0/)
 
 ## Author Information
 
--   Wong Hoi Sing Edison
-    -   <https://twitter.com/hswong3i>
-    -   <https://github.com/hswong3i>
+- Wong Hoi Sing Edison
+  - <https://twitter.com/hswong3i>
+  - <https://github.com/hswong3i>
